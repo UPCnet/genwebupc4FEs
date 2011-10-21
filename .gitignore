@@ -1,4 +1,5 @@
 *.pyc
+produccio/eggs
 produccio/var
 produccio/parts
 produccio/bin
