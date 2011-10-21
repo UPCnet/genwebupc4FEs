@@ -1,0 +1,66 @@
+#!/usr/bin/python
+
+import urllib, urllib2
+import socket
+
+#print socket.gethostname()
+localhost = 'sneridagh'
+# zeos = ['zeo1', 'zeo2', 'zeo3', 'zeo4', 'zeo5', 'zeo6', 'zeo7', 'zeo8', 'zeo9', 'zeo10', 'zeo11', 'zeo12']
+zeos = ['zeo1' ]
+ports = {'zeo1':8001, 'zeo2':8002, 'zeo3':8003, 'zeo4':8004, 'zeo5':8005, 'zeo6':8006, 'zeo7':8007, 'zeo8':8008, 'zeo9':8009, 'zeo10':8010, 'zeo11':8011, 'zeo12':8012,}
+# server = 'mebsuta.upc.es'
+server = 'capricornius2.upc.es'
+buildoutDir = '/var/plone/genwebupc4FEs/produccio'
+#buildoutDir = '/var/plone/sylara/genwebupc/produccio'
+
+
+def install(options, buildout):
+
+    # Descarreguem la configuracio per aquest frontend
+    configFE = urllib2.urlopen(('http://' + server + '/config/' + localhost), None)
+    assignacions = {'zeo1':[], 'zeo2':[], 'zeo3':[], 'zeo4':[], 'zeo5':[], 'zeo6':[], 'zeo7':[], 'zeo8':[], 'zeo9':[], 'zeo10':[], 'zeo11':[], 'zeo12':[],}
+    servers = {'zeo1':"", 'zeo2':"", 'zeo3':"", 'zeo4':"", 'zeo5':"", 'zeo6':"", 'zeo7':"", 'zeo8':"", 'zeo9':"", 'zeo10':"", 'zeo11':"", 'zeo12':"",}
+    for assignacio in configFE:
+        assignacio = assignacio.split()
+        assignacions[assignacio[0]].append(assignacio[1])
+        servers[assignacio[0]] = assignacio[3]
+
+    for zeoname in zeos:
+
+        # Descarreguem el fitxer d'instancies per aquest entorn
+        #import pdb; pdb.set_trace()
+        for zope in assignacions[zeoname]:
+            instancies = urllib2.urlopen(('http://' + server + '/instancies/' + zeoname), None)
+            zopeConfigFile = open(buildoutDir + '/parts/' + zope + '/etc/zope-instances.conf',"w")
+            escriuConfigInstancies(zopeConfigFile, instancies, zeoname, servers[zeoname])
+            escriuConfigInstanciaDebug(zopeConfigFile, instancies, zeoname, servers[zeoname])
+            zopeConfigFile.close()
+            instancies.close()
+
+
+def escriuConfigInstanciaDebug(zopeConfigFile, instancies, zeoname, server):
+    # La configuracio de la instancia de debug n
+    instancies = urllib2.urlopen('http://' + server + '/instancies/' + zeoname, None)
+    entorn = zeoname.replace('zeo','')
+    zopeConfigFile = open(buildoutDir + '/parts/zcdebug' + entorn + '/etc/zope-instances.conf',"w")
+    escriuConfigInstancies(zopeConfigFile, instancies, zeoname, server)
+    instancies.close()
+    zopeConfigFile.close()
+
+
+def escriuConfigInstancies(zopeConfigFile, instancies, zeoname, server):
+    for instance in instancies:
+        instance = instance.strip('\n')
+        zopeConfigFile.write("<zodb_db " + instance + ">\n")
+        zopeConfigFile.write("  cache-size 5000\n")
+        zopeConfigFile.write("  <zeoclient>\n")
+        zopeConfigFile.write("     blob-dir /var/plone/genwebupc/produccio/var/blobs/" + instance + "\n")
+        zopeConfigFile.write("     shared-blob-dir off\n")
+        zopeConfigFile.write("     server " + server + ":" + str(ports[zeoname]) + "\n")
+        zopeConfigFile.write("     min-disconnect-poll 1\n")
+        zopeConfigFile.write("     storage " + instance + "\n")
+        zopeConfigFile.write("     name " + instance + "\n")
+        zopeConfigFile.write("     cache-size 20MB\n")
+        zopeConfigFile.write("  </zeoclient>\n")
+        zopeConfigFile.write("  mount-point /" + instance + "\n")
+        zopeConfigFile.write("</zodb_db>\n")

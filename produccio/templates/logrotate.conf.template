@@ -1,0 +1,82 @@
+rotate 52
+weekly
+create
+compress
+delaycompress
+create 644 plone plone
+
+${buildout:directory}/var/log/zc1*.log {
+    postrotate
+        ${buildout:directory}/bin/zc1 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc2*.log {
+    postrotate
+        ${buildout:directory}/bin/zc2 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc3*.log {
+    postrotate
+        ${buildout:directory}/bin/zc3 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc4*.log {
+    postrotate
+        ${buildout:directory}/bin/zc4 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc5*.log {
+    postrotate
+        ${buildout:directory}/bin/zc5 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc6*.log {
+    postrotate
+        ${buildout:directory}/bin/zc6 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc7*.log {
+    postrotate
+        ${buildout:directory}/bin/zc7 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc8*.log {
+    postrotate
+        ${buildout:directory}/bin/zc8 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc9*.log {
+    postrotate
+        ${buildout:directory}/bin/zc9 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc10*.log {
+    postrotate
+        ${buildout:directory}/bin/zc10 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc11*.log {
+    postrotate
+        ${buildout:directory}/bin/zc11 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc12*.log {
+    postrotate
+        ${buildout:directory}/bin/zc12 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc13*.log {
+    postrotate
+        ${buildout:directory}/bin/zc13 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc14*.log {
+    postrotate
+        ${buildout:directory}/bin/zc14 logreopen
+    endscript
+}
+${buildout:directory}/var/log/zc15*.log {
+    postrotate
+        ${buildout:directory}/bin/zc15 logreopen
+    endscript
+}
