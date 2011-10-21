@@ -4,7 +4,7 @@ produccio/parts
 produccio/bin
 produccio/.installed.cfg
 produccio/.mr.developer.cfg
-produccio/cache/
 produccio/develop-eggs/
 produccio/production/
 produccio/src/
+produccio/cache/*
