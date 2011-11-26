@@ -8,4 +8,5 @@ produccio/.mr.developer.cfg
 produccio/develop-eggs/
 produccio/production/
 produccio/src/
+produccio/translations
 produccio/cache/*
