@@ -44,14 +44,16 @@ font-weight:normal;
 min-width:50px; min-height:20px;
 background: #007bc0;
 color:#fff;
--moz-border-radius:2em;-webkit-border-radius:2em;border-radius:2em;
+-moz-border-radius:2em;-webkit-border-radius:2em;border-radius:.35em;
 cursor:pointer;
 float:left;
 margin-bottom:.5em;
 }
 
-#insert {background: #007bc0;}
-#cancel {background: #7bc000; float:right}
+#insert, .context {background: #007bc0; margin-right:.5em !important;}
+#searchtext {margin-right:.5em !important;}
+.searchButton {margin:0 !important;}
+#cancel {background: #6cbad5 ; color: black; margin-right:.5em;}
 
 /* Browse */
 a.pickcolor, a.browse {text-decoration:none}
@@ -101,7 +103,7 @@ td.charmap, #charmap a {width:15px; height:10px; color:#000; border:1px solid #A
 /* Titles */
 h1, h2, h3, h4 {color:#2B6FB6; margin:0; padding:0; padding-top:5px;}
 h3 {font-size:14px;}
-.title {font-size:15px; font-weight:bold; color:#7bc000; font-family:Museo, Arial, Helvetica, sans-serif;}
+.title {font-size:13px; font-weight:bold; color:#333; font-family:Museo, Arial, Helvetica, sans-serif;}
 
 /* Dialog specific */
 #link .panel_wrapper, #link div.current {height:125px;}
@@ -139,5 +141,5 @@ iframe {width:100% !important;}
 fieldset.subPanel {width: 47% ;}
 #internal_details_panel {display: none;width:24% !important;}
 
-html, body {background-color:#d9f2ff !important;}
+html, body {background-color:#e6e6e6 !important;}
 .dialog-wrapper {height:590px;}
