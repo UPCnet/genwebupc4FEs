@@ -1,0 +1,3 @@
+[submodule "produccio/o2k7"]
+	path = produccio/o2k7
+	url = https://github.com/UPCnet/genweb.tinyskin.git
